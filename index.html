@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>جوازي | خدمات الجواز</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f3f6f8;
+  color:#17202a;
+}
+
+.app{
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+}
+
+header{
+  background:linear-gradient(135deg,#075e54,#0b806d);
+  color:white;
+  padding:25px 20px 30px;
+  border-radius:0 0 30px 30px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:58px;
+  height:58px;
+  background:white;
+  color:#075e54;
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+}
+
+h1{
+  margin:0;
+  font-size:25px;
+}
+
+.brand p{
+  margin:5px 0 0;
+  opacity:.85;
+}
+
+.demo{
+  margin-top:20px;
+  background:rgba(255,255,255,.14);
+  padding:11px;
+  border-radius:12px;
+  text-align:center;
+  font-size:13px;
+}
+
+main{
+  padding:18px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.card h2{
+  margin-top:0;
+  font-size:19px;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.service{
+  border:2px solid #e5eaea;
+  border-radius:16px;
+  padding:20px 10px;
+  text-align:center;
+  cursor:pointer;
+  background:white;
+}
+
+.service:hover{
+  border-color:#0b806d;
+}
+
+.service .icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.service strong{
+  display:block;
+  font-size:16px;
+}
+
+.service span{
+  display:block;
+  color:#777;
+  font-size:12px;
+  margin-top:5px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:14px 0 7px;
+}
+
+input,select{
+  width:100%;
+  padding:14px;
+  border:2px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+  background:white;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:#0b806d;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  margin-top:14px;
+  background:#087763;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button.secondary{
+  background:#e8f1ef;
+  color:#075e54;
+}
+
+button.danger{
+  background:#b42318;
+}
+
+.hidden{
+  display:none;
+}
+
+.steps{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.step{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#ddd;
+  color:#666;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  position:relative;
+  z-index:2;
+}
+
+.step.active{
+  background:#087763;
+  color:white;
+}
+
+.step.done{
+  background:#18a77c;
+  color:white;
+}
+
+.progress{
+  position:absolute;
+  top:15px;
+  right:15px;
+  left:15px;
+  height:3px;
+  background:#ddd;
+}
+
+.notice{
+  padding:14px;
+  background:#fff7df;
+  color:#805b00;
+  border-radius:12px;
+  line-height:1.7;
+  margin-bottom:15px;
+}
+
+.success{
+  padding:18px;
+  background:#e6f7ef;
+  color:#087763;
+  border-radius:15px;
+  text-align:center;
+  line-height:1.8;
+}
+
+.error{
+  color:#b42318;
+  background:#fff0ef;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.request-number{
+  font-size:24px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin:12px 0;
+}
+
+.file-box{
+  border:2px dashed #bbb;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+  margin-top:10px;
+}
+
+.preview{
+  max-width:120px;
+  max-height:120px;
+  border-radius:12px;
+  margin-top:12px;
+  display:none;
+}
+
+.track-result{
+  margin-top:15px;
+}
+
+.status{
+  padding:15px;
+  border-radius:12px;
+  background:#eef8f5;
+  color:#075e54;
+  line-height:1.8;
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  padding:10px 20px 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="brand">
+    <div class="logo">🛂</div>
+    <div>
+      <h1>جوازي</h1>
+      <p>خدمات طلب وتجديد الجواز</p>
+    </div>
+  </div>
+
+  <div class="demo">
+    نموذج تجريبي غير تابع لأي جهة حكومية
+  </div>
+</header>
+
+<main>
+
+<!-- الصفحة الرئيسية -->
+
+<section id="home">
+
+  <div class="card">
+    <h2>ماذا تريد أن تفعل؟</h2>
+
+    <div class="services">
+
+      <div class="service" onclick="startApplication('new')">
+        <div class="icon">🆕</div>
+        <strong>استخراج جواز</strong>
+        <span>طلب جواز جديد</span>
+      </div>
+
+      <div class="service" onclick="startApplication('renew')">
+        <div class="icon">🔄</div>
+        <strong>تجديد جواز</strong>
+        <span>تجديد الجواز الحالي</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+
+    <h2>📋 متابعة طلب</h2>
+
+    <label>رقم الطلب</label>
+
+    <input
+      id="trackNumber"
+      placeholder="مثال: JW-2026-12345"
+    >
+
+    <button onclick="trackApplication()">
+      🔍 متابعة الطلب
+    </button>
+
+    <div id="trackResult"></div>
+
+  </div>
+
+</section>
+
+
+<!-- نموذج الطلب -->
+
+<section id="application" class="hidden">
+
+<div class="card">
+
+  <div class="steps">
+
+    <div class="progress"></div>
+
+    <div class="step active" id="s1">1</div>
+    <div class="step" id="s2">2</div>
+    <div class="step" id="s3">3</div>
+    <div class="step" id="s4">4</div>
+    <div class="step" id="s5">5</div>
+
+  </div>
+
+  <!-- الخطوة 1 -->
+
+  <div id="page1">
+
+    <h2 id="applicationTitle">
+      بيانات مقدم الطلب
+    </h2>
+
+    <label>الاسم الكامل</label>
+
+    <input id="fullName" placeholder="اكتب الاسم الكامل">
+
+    <label>الرقم الوطني</label>
+
+    <input
+      id="nationalNumber"
+      inputmode="numeric"
+      placeholder="أدخل الرقم الوطني"
+    >
+
+    <label>تاريخ الميلاد</label>
+
+    <input id="birthDate" type="date">
+
+    <label>رقم الهاتف</label>
+
+    <input
+      id="phone"
+      type="tel"
+      placeholder="09xxxxxxxx"
+    >
+
+    <button onclick="nextStep(1)">
+      التالي
+    </button>
+
+  </div>
+
+
+  <!-- الخطوة 2 -->
+
+  <div id="page2" class="hidden">
+
+    <h2>بيانات الجواز</h2>
+
+    <div id="renewFields">
+
+      <label>رقم الجواز السابق</label>
+
+      <input
+        id="oldPassport"
+        placeholder="رقم الجواز"
+      >
+
+      <label>تاريخ انتهاء الجواز</label>
+
+      <input id="expiryDate" type="date">
+
+    </div>
+
+    <label>مكان استلام الجواز</label>
+
+    <select id="center">
+
+      <option value="">اختر مركز الاستلام</option>
+
+      <option>مركز الخدمة - الخرطوم</option>
+      <option>مركز الخدمة - بورتسودان</option>
+      <option>مركز الخدمة - مدني</option>
+      <option>مركز الخدمة - عطبرة</option>
+
+    </select>
+
+    <button onclick="nextStep(2)">
+      التالي
+    </button>
+
+    <button
+      class="secondary"
+      onclick="previousStep(2)">
+      السابق
+    </button>
+
+  </div>
+
+
+  <!-- الخطوة 3 -->
+
+  <div id="page3" class="hidden">
+
+    <h2>المستندات</h2>
+
+    <div class="notice">
+      ⚠️ هذه النسخة تجريبية.
+      الملفات لا يتم إرسالها إلى أي جهة حكومية.
+    </div>
+
+    <label>الصورة الشخصية</label>
+
+    <div class="file-box">
+
+      اختر صورة شخصية
+
+      <input
+        type="file"
+        id="photo"
+        accept="image/*"
+        onchange="previewImage(this)"
+      >
+
+      <img id="photoPreview" class="preview">
+
+    </div>
+
+    <label>صورة المستند</label>
+
+    <div class="file-box">
+
+      اختر صورة المستند
+
+      <input
+        type="file"
+        id="document"
+        accept="image/*,.pdf"
+      >
+
+    </div>
+
+    <button onclick="nextStep(3)">
+      التالي
+    </button>
+
+    <button
+      class="secondary"
+      onclick="previousStep(3)">
+      السابق
+    </button>
+
+  </div>
+
+
+  <!-- الخطوة 4 -->
+
+  <div id="page4" class="hidden">
+
+    <h2>مراجعة الطلب</h2>
+
+    <div id="review"></div>
+
+    <button onclick="nextStep(4)">
+      تأكيد الطلب
+    </button>
+
+    <button
+      class="secondary"
+      onclick="previousStep(4)">
+      تعديل البيانات
+    </button>
+
+  </div>
+
+
+  <!-- الخطوة 5 -->
+
+  <div id="page5" class="hidden">
+
+    <div class="success">
+
+      <div style="font-size:40px;">✅</div>
+
+      <h2>تم إنشاء الطلب</h2>
+
+      <p>
+        رقم طلبك التجريبي:
+      </p>
+
+      <div
+        class="request-number"
+        id="requestNumber">
+      </div>
+
+      <p>
+        احتفظ برقم الطلب لمتابعة حالته.
+      </p>
+
+    </div>
+
+    <button onclick="goHome()">
+      العودة للرئيسية
+    </button>
+
+  </div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+  جوازي © 2026 — نموذج تجريبي
+</footer>
+
+</div>
+
+
+<script>
+
+let applicationType = "new";
+let currentStep = 1;
+
+let applications =
+  JSON.parse(localStorage.getItem("jawaziApplications")) || [];
+
+
+function startApplication(type){
+
+  applicationType = type;
+
+  document.getElementById("home")
+    .classList.add("hidden");
+
+  document.getElementById("application")
+    .classList.remove("hidden");
+
+  document.getElementById("applicationTitle").textContent =
+    type === "new"
+      ? "طلب استخراج جواز جديد"
+      : "طلب تجديد الجواز";
+
+  document.getElementById("renewFields").style.display =
+    type === "renew" ? "block" : "none";
+
+  showStep(1);
+}
+
+
+function showStep(step){
+
+  currentStep = step;
+
+  for(let i=1;i<=5;i++){
+
+    document
+      .getElementById("page"+i)
+      .classList.add("hidden");
+
+    document
+      .getElementById("s"+i)
+      .classList.remove("active");
+
+  }
+
+  document
+    .getElementById("page"+step)
+    .classList.remove("hidden");
+
+  for(let i=1;i<step;i++){
+
+    document
+      .getElementById("s"+i)
+      .classList.add("done");
+
+  }
+
+  document
+    .getElementById("s"+step)
+    .classList.add("active");
+}
+
+
+function nextStep(step){
+
+  if(step === 1){
+
+    const name =
+      document.getElementById("fullName").value.trim();
+
+    const national =
+      document.getElementById("nationalNumber").value.trim();
+
+    const birth =
+      document.getElementById("birthDate").value;
+
+    const phone =
+      document.getElementById("phone").value.trim();
+
+    if(!name || !national || !birth || !phone){
+
+      alert("يرجى إكمال جميع البيانات أولاً.");
+
+      return;
+    }
+  }
+
+
+  if(step === 2){
+
+    const center =
+      document.getElementById("center").value;
+
+    if(!center){
+
+      alert("يرجى اختيار مركز الاستلام.");
+
+      return;
+    }
+
+  }
+
+
+  if(step === 3){
+
+    createReview();
+
+  }
+
+
+  if(step === 4){
+
+    createApplication();
+
+    showStep(5);
+
+    return;
+  }
+
+
+  showStep(step + 1);
+}
+
+
+function previousStep(step){
+
+  showStep(step - 1);
+
+}
+
+
+function previewImage(input){
+
+  const preview =
+    document.getElementById("photoPreview");
+
+  if(input.files && input.files[0]){
+
+    preview.src =
+      URL.createObjectURL(input.files[0]);
+
+    preview.style.display = "block";
+
+  }
+
+}
+
+
+function createReview(){
+
+  const name =
+    document.getElementById("fullName").value;
+
+  const national =
+    document.getElementById("nationalNumber").value;
+
+  const phone =
+    document.getElementById("phone").value;
+
+  const center =
+    document.getElementById("center").value;
+
+  const type =
+    applicationType === "new"
+      ? "استخراج جواز جديد"
+      : "تجديد جواز";
+
+  document.getElementById("review").innerHTML = `
+
+    <div class="notice">
+
+      <strong>نوع الطلب:</strong>
+      ${type}
+
+      <br><br>
+
+      <strong>الاسم:</strong>
+      ${name}
+
+      <br><br>
+
+      <strong>الرقم الوطني:</strong>
+      ${national}
+
+      <br><br>
+
+      <strong>الهاتف:</strong>
+      ${phone}
+
+      <br><br>
+
+      <strong>مركز الاستلام:</strong>
+      ${center}
+
+    </div>
+
+    <p>
+      اضغط «تأكيد الطلب» لإنشاء رقم الطلب التجريبي.
+    </p>
+
+  `;
+
+}
+
+
+function createApplication(){
+
+  const random =
+    Math.floor(10000 + Math.random() * 90000);
+
+  const requestNumber =
+    "JW-" +
+    new Date().getFullYear() +
+    "-" +
+    random;
+
+  const application = {
+
+    number: requestNumber,
+
+    type: applicationType,
+
+    name:
+      document.getElementById("fullName").value,
+
+    national:
+      document.getElementById("nationalNumber").value,
+
+    phone:
+      document.getElementById("phone").value,
+
+    center:
+      document.getElementById("center").value,
+
+    status:
+      "قيد المراجعة",
+
+    date:
+      new Date().toLocaleDateString("ar-SD")
+
+  };
+
+
+  applications.push(application);
+
+  localStorage.setItem(
+    "jawaziApplications",
+    JSON.stringify(applications)
+  );
+
+
+  document.getElementById("requestNumber")
+    .textContent = requestNumber;
+
+}
+
+
+function trackApplication(){
+
+  const number =
+    document.getElementById("trackNumber")
+      .value.trim();
+
+  const result =
+    document.getElementById("trackResult");
+
+
+  if(!number){
+
+    result.innerHTML =
+      '<div class="error">أدخل رقم الطلب أولاً.</div>';
+
+    return;
+  }
+
+
+  const application =
+    applications.find(
+      item => item.number === number
+    );
+
+
+  if(!application){
+
+    result.innerHTML = `
+
+      <div class="error">
+
+        لم يتم العثور على هذا الطلب.
+
+        <br>
+
+        تأكد من رقم الطلب.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  result.innerHTML = `
+
+    <div class="status">
+
+      <strong>رقم الطلب:</strong>
+      ${application.number}
+
+      <br>
+
+      <strong>نوع الطلب:</strong>
+      ${
+        application.type === "new"
+        ? "استخراج جواز جديد"
+        : "تجديد جواز"
+      }
+
+      <br>
+
+      <strong>الحالة:</strong>
+      ${application.status}
+
+      <br>
+
+      <strong>مركز الاستلام:</strong>
+      ${application.center}
+
+    </div>
+
+  `;
+
+}
+
+
+function goHome(){
+
+  location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
